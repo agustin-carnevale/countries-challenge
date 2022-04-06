@@ -14,6 +14,7 @@ import { makeStyles } from '@mui/styles'
 
 import { REGIONS } from '../../../config/constants'
 import { CountriesContext } from '../../../context/CountriesContext'
+import useDebouncer from '../../../hooks/useDebouncer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,7 +30,9 @@ const SearchBar = () => {
 
   const [region, setRegion] = useState('')
   const [input, setInput] = useState('')
+  const debouncedInput = useDebouncer<string>(input, 600)
   const { countries, setFilteredCountries } = useContext(CountriesContext)
+
 
   const handleRegionChange = (event: SelectChangeEvent<string>) => {
     const selectedRegion = event.target.value
@@ -46,12 +49,12 @@ const SearchBar = () => {
       const filtered = countries.filter(
         (country) =>
           (region === '' || country.region === region) &&
-          country.name.common.toLowerCase().includes(input.toLowerCase())
+          country.name.common.toLowerCase().includes(debouncedInput.toLowerCase())
       )
       setFilteredCountries(filtered)
     }
     filterCountries()
-  }, [input, region, countries, setFilteredCountries])
+  }, [debouncedInput, region, countries, setFilteredCountries])
 
   return (
     <Box className={classes.container}>
