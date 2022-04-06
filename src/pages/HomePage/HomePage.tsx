@@ -1,9 +1,10 @@
 import { useContext } from 'react'
-import CountryCard from './components/CountryCard'
 import { makeStyles } from '@mui/styles'
-
 import { Box, CircularProgress, Typography } from '@mui/material'
+
 import { CountriesContext } from '../../context/CountriesContext'
+import CountryCard from './components/CountryCard'
+import SearchBar from './components/SearchBar'
 
 const useStyles = makeStyles((theme) => ({
   pageContainer: {
@@ -25,18 +26,21 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
   const classes = useStyles()
-  const { countries, loading, errorMessage } = useContext(CountriesContext)
+  const { filteredCountries, loading, errorMessage } =
+    useContext(CountriesContext)
 
   return (
     <Box className={classes.pageContainer}>
+      <SearchBar />
       <div className={classes.cardsContainer}>
         {loading ? (
           <CircularProgress />
         ) : errorMessage ? (
           <Typography>{errorMessage}</Typography>
         ) : (
-          countries.map((country, index) => (
+          filteredCountries.map((country, index) => (
             <CountryCard
+              key={`${country.name?.common}-${index}`}
               name={country.name?.common}
               flagImg={country.flags?.png}
               population={country.population}

@@ -3,16 +3,17 @@ import axios from 'axios'
 
 import { CountriesContext } from './CountriesContext'
 import { Country } from '../models/Country'
-import { COUNTRIES_API } from '../config/constants';
+import { COUNTRIES_API } from '../config/constants'
 
 interface CountriesProviderProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[]
 }
 
 export const CountriesProvider = ({ children }: CountriesProviderProps) => {
   const [countries, setCountries] = useState<Country[]>([])
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>([])
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -21,6 +22,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       try {
         const { data } = await axios.get(COUNTRIES_API)
         setCountries(data)
+        setFilteredCountries(data)
       } catch (error) {
         setErrorMessage(`Something went wrong. Try again. "${error}"`)
       } finally {
@@ -36,6 +38,8 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         countries,
         loading,
         errorMessage,
+        filteredCountries,
+        setFilteredCountries,
       }}
     >
       {children}

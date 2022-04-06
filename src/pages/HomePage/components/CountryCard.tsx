@@ -19,7 +19,7 @@ const CountryCard = ({
     <Card sx={{ maxWidth: 340, margin: '20px' }}>
       <CardMedia component="img" height="250" image={flagImg} alt="flag" />
       <CardContent>
-        <Typography style={{fontWeight: 'bold'}}>{name}</Typography>
+        <Typography style={{ fontWeight: 'bold' }}>{name}</Typography>
 
         <Typography>Population: {population}</Typography>
         <Typography>Region: {region}</Typography>
