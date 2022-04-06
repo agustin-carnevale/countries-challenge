@@ -1,10 +1,8 @@
-import React from 'react'
+import HomePage from "./pages/HomePage/HomePage"
 
 const App = () => {
   return (
-    <div>
-      <h1>Countries Challenge!!</h1>
-    </div>
+    <HomePage />
   )
 }
 
