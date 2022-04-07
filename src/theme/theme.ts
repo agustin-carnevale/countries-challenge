@@ -1,5 +1,27 @@
-import { PaletteMode } from '@mui/material'
+import { PaletteMode, Breakpoints } from '@mui/material'
 import { amber, grey, deepOrange } from '@mui/material/colors'
+
+// define custom breakpoints
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: false
+    sm: false
+    md: false
+    lg: false
+    xl: false
+    mobile: true
+    tablet: true
+    desktop: true
+    largeDesktop: true
+  }
+}
+
+const breakpoints: Breakpoints['values'] = {
+  mobile: 375,
+  tablet: 768,
+  desktop: 1440,
+  largeDesktop: 1900,
+}
 
 export const getDesign = (mode: PaletteMode) => ({
   palette: {
@@ -31,5 +53,8 @@ export const getDesign = (mode: PaletteMode) => ({
             secondary: grey[500],
           },
         }),
+  },
+  breakpoints: {
+    values: breakpoints,
   },
 })

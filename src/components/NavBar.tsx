@@ -4,11 +4,12 @@ import { makeStyles } from '@mui/styles'
 
 import { ThemeModeContext } from '../context'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
     padding: '15px',
   },
@@ -20,8 +21,10 @@ const NavBar = () => {
 
   return (
     <Paper className={classes.container}>
-      <Typography variant="h4">Where in the world?</Typography>
-      <Typography variant="h6">
+      <Typography sx={{ typography: { mobile: 'h5', desktop: 'h4' } }}>
+        Where in the world?
+      </Typography>
+      <Typography sx={{ typography: { mobile: 'h6', desktop: 'h5' } }}>
         Dark Mode
         <Switch checked={mode === 'dark'} onChange={modeToggle} />
       </Typography>

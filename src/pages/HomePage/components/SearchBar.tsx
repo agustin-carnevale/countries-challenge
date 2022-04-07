@@ -10,18 +10,36 @@ import {
   SelectChangeEvent,
 } from '@mui/material'
 import { Search } from '@mui/icons-material'
+import { Theme } from '@mui/system'
 import { makeStyles } from '@mui/styles'
 
 import { REGIONS } from '../../../config/constants'
 import { CountriesContext } from '../../../context'
 import useDebouncer from '../../../hooks/useDebouncer'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
     padding: '30px',
+
+    [theme.breakpoints.down('tablet')]: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: '20px 0px',
+    },
+  },
+  input: {
+    [theme.breakpoints.down('mobile')]: {
+      width: '100%',
+    },
+  },
+  select: {
+    [theme.breakpoints.down('mobile')]: {
+      width: '100%',
+    },
   },
 }))
 
@@ -60,6 +78,7 @@ const SearchBar = () => {
   return (
     <Box className={classes.container}>
       <TextField
+        sx={{ minWidth: '260px' }}
         placeholder="Search for a country"
         InputProps={{
           startAdornment: (
@@ -70,8 +89,12 @@ const SearchBar = () => {
         }}
         value={input}
         onChange={handleInputChange}
+        className={classes.input}
       />
-      <FormControl sx={{ minWidth: '200px' }}>
+      <FormControl
+        sx={{ minWidth: '260px', margin: '30px' }}
+        className={classes.select}
+      >
         <InputLabel id="region-select-label">Select Region</InputLabel>
         <Select
           labelId="region-select-label"
