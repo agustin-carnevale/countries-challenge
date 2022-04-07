@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { CountriesContext } from './CountriesContext'
-import { Country } from '../models/Country'
-import { COUNTRIES_API } from '../config/constants'
+import { Country } from '../../models/Country'
+import { COUNTRIES_API } from '../../config/constants'
 
 interface CountriesProviderProps {
   children: JSX.Element | JSX.Element[]

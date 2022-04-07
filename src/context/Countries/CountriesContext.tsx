@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { Country } from '../models/Country'
+import { Country } from '../../models/Country'
 
 interface CountriesContextState {
   countries: Country[]

@@ -13,7 +13,7 @@ import { Search } from '@mui/icons-material'
 import { makeStyles } from '@mui/styles'
 
 import { REGIONS } from '../../../config/constants'
-import { CountriesContext } from '../../../context/CountriesContext'
+import { CountriesContext } from '../../../context'
 import useDebouncer from '../../../hooks/useDebouncer'
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,6 @@ const SearchBar = () => {
   const debouncedInput = useDebouncer<string>(input, 600)
   const { countries, setFilteredCountries } = useContext(CountriesContext)
 
-
   const handleRegionChange = (event: SelectChangeEvent<string>) => {
     const selectedRegion = event.target.value
     if (selectedRegion !== region) {
@@ -49,7 +48,9 @@ const SearchBar = () => {
       const filtered = countries.filter(
         (country) =>
           (region === '' || country.region === region) &&
-          country.name.common.toLowerCase().includes(debouncedInput.toLowerCase())
+          country.name.common
+            .toLowerCase()
+            .includes(debouncedInput.toLowerCase())
       )
       setFilteredCountries(filtered)
     }

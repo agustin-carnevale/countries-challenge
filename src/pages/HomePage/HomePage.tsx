@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { makeStyles } from '@mui/styles'
 import { Box, CircularProgress, Typography } from '@mui/material'
 
-import { CountriesContext } from '../../context/CountriesContext'
+import { CountriesContext } from '../../context'
 import CountryCard from './components/CountryCard'
 import SearchBar from './components/SearchBar'
 
