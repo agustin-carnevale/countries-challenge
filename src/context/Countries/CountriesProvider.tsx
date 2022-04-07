@@ -21,8 +21,16 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
       setLoading(true)
       try {
         const { data } = await axios.get(COUNTRIES_API)
-        setCountries(data)
-        setFilteredCountries(data)
+        const processedData: Country[] = data.map((item: any) => {
+          const country: Country = {
+            ...item,
+            currencies: Object.values(item.currencies),
+            languages: Object.values(item.languages),
+          }
+          return country
+        })
+        setCountries(processedData)
+        setFilteredCountries(processedData)
       } catch (error) {
         setErrorMessage(`Something went wrong. Try again. "${error}"`)
       } finally {
@@ -32,6 +40,10 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
     fetchCountries()
   }, [])
 
+  const countryByCode = (code: string) => {
+    return countries.find((country) => country.ccn3 === code)
+  }
+
   return (
     <CountriesContext.Provider
       value={{
@@ -40,6 +52,7 @@ export const CountriesProvider = ({ children }: CountriesProviderProps) => {
         errorMessage,
         filteredCountries,
         setFilteredCountries,
+        countryByCode,
       }}
     >
       {children}

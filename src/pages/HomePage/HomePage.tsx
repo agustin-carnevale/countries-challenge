@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import { Box, CircularProgress, Typography } from '@mui/material'
 
@@ -39,14 +40,19 @@ const HomePage = () => {
           <Typography>{errorMessage}</Typography>
         ) : (
           filteredCountries.map((country, index) => (
-            <CountryCard
+            <Link
+              to={`country/${country.ccn3}`}
+              style={{ textDecoration: 'none' }}
               key={`${country.name?.common}-${index}`}
-              name={country.name?.common}
-              flagImg={country.flags?.png}
-              population={country.population}
-              region={country.region}
-              capital={country.capital ? country.capital[0] : ''}
-            />
+            >
+              <CountryCard
+                name={country.name?.common}
+                flagImg={country.flags?.png}
+                population={country.population}
+                region={country.region}
+                capital={country.capital ? country.capital[0] : ''}
+              />
+            </Link>
           ))
         )}
       </div>

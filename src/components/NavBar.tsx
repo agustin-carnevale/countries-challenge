@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles'
 
 import { ThemeModeContext } from '../context'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'row',

@@ -7,6 +7,7 @@ interface CountriesContextState {
   errorMessage: string
   filteredCountries: Country[]
   setFilteredCountries: React.Dispatch<React.SetStateAction<Country[]>>
+  countryByCode: (code: string) => Country | undefined
 }
 
 export const CountriesContext = createContext<CountriesContextState>(
