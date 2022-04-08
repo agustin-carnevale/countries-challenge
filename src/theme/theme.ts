@@ -18,7 +18,7 @@ declare module '@mui/material/styles' {
 
 const breakpoints: Breakpoints['values'] = {
   mobile: 375,
-  tablet: 768,
+  tablet: 840,
   desktop: 1440,
   largeDesktop: 1900,
 }

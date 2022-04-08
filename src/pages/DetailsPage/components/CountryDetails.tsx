@@ -1,15 +1,33 @@
 import { makeStyles } from '@mui/styles'
-import { Box, Typography, List, ListItem, Stack, Card } from '@mui/material'
+import { Theme } from '@mui/system'
+import { Box, Typography, List, ListItem, Card } from '@mui/material'
 
 import { Country } from '../../../models/Country'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   detailsContainer: {
     width: '50%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    paddingLeft: '20px',
+
+    [theme.breakpoints.down('tablet')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.down('mobile')]: {
+      paddingLeft: '10px',
+    },
+  },
+  bordersContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+  },
+  borderItem: {
+    margin: '10px',
   },
 }))
 
@@ -46,7 +64,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
       <Typography variant="body1">
         <b>Languages:</b>
       </Typography>
-      <List component={Stack} direction="row">
+      <List>
         {languages.map((language) => (
           <ListItem key={language}>{language}</ListItem>
         ))}
@@ -54,7 +72,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
       <Typography variant="body1">
         <b>Currencies:</b>
       </Typography>
-      <List component={Stack} direction="row">
+      <List>
         {currencies.map((currency) => (
           <ListItem key={currency.name}>
             {currency.name} ({currency.symbol})
@@ -66,13 +84,13 @@ const CountryDetails = ({ country }: { country: Country }) => {
           <Typography variant="body1">
             <b>Borders:</b>
           </Typography>
-          <List component={Stack} direction="row">
+          <Box className={classes.bordersContainer}>
             {borders.map((border) => (
-              <ListItem key={border}>
+              <Box key={border} className={classes.borderItem}>
                 <Card style={{ padding: '7px' }}>{border}</Card>
-              </ListItem>
+              </Box>
             ))}
-          </List>
+          </Box>
         </>
       )}
     </Box>
